@@ -9,15 +9,19 @@ interface PostCardProps {
   timestamp: string;
   avatar?: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export function PostCard({ username, platform, content, timestamp, avatar, className }: PostCardProps) {
+export function PostCard({ username, platform, content, timestamp, avatar, className, style }: PostCardProps) {
   return (
-    <Card className={cn(
-      "overflow-hidden transition-all duration-300 hover:shadow-lg animate-fade-up",
-      "bg-white/80 backdrop-blur-sm border border-gray-100",
-      className
-    )}>
+    <Card 
+      className={cn(
+        "overflow-hidden transition-all duration-300 hover:shadow-lg animate-fade-up",
+        "bg-white/80 backdrop-blur-sm border border-gray-100",
+        className
+      )}
+      style={style}
+    >
       <div className="p-4">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100">

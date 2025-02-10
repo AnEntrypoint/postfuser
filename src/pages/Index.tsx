@@ -5,25 +5,52 @@ import { PostGrid } from "@/components/PostGrid";
 const MOCK_POSTS = [
   {
     id: "1",
-    username: "sarah_designer",
-    platform: "Twitter",
-    content: "Just launched my new portfolio website! Check it out and let me know what you think",
+    username: "TechChannel",
+    platform: "YouTube",
+    content: "Just uploaded: '10 Must-Know React Tips for 2024' - Check out our latest video tutorial on modern React development practices!",
     timestamp: "2 hours ago",
+    avatar: "https://picsum.photos/seed/tech/100",
   },
   {
     id: "2",
-    username: "tech_enthusiast",
-    platform: "LinkedIn",
-    content: "Exciting news! Our team just completed the migration to microservices architecture.",
-    timestamp: "5 hours ago",
+    username: "CodingBootcamp",
+    platform: "Facebook",
+    content: "🎉 Exciting news! Our next web development bootcamp starts next month. Early bird registration is now open. Learn React, TypeScript, and more!",
+    timestamp: "3 hours ago",
+    avatar: "https://picsum.photos/seed/coding/100",
   },
   {
     id: "3",
-    username: "travel_photography",
-    platform: "Instagram",
-    content: "Capturing the sunset at the Grand Canyon. Nature never ceases to amaze me.",
-    timestamp: "1 day ago",
+    username: "WebDevDaily",
+    platform: "X",
+    content: "💡 Quick Tip: Use the new React hooks pattern for better state management. Here's how to implement it in your next project. #ReactJS #WebDev",
+    timestamp: "5 hours ago",
+    avatar: "https://picsum.photos/seed/webdev/100",
   },
+  {
+    id: "4",
+    username: "DevTutorials",
+    platform: "YouTube",
+    content: "NEW VIDEO: 'Building a Full-Stack App with React and Node.js' - Learn how to create a complete web application from scratch!",
+    timestamp: "1 day ago",
+    avatar: "https://picsum.photos/seed/dev/100",
+  },
+  {
+    id: "5",
+    username: "TechStartup",
+    platform: "Facebook",
+    content: "We're hiring! Looking for talented React developers to join our team. Remote positions available. DM for details!",
+    timestamp: "2 days ago",
+    avatar: "https://picsum.photos/seed/startup/100",
+  },
+  {
+    id: "6",
+    username: "CodePro",
+    platform: "X",
+    content: "Just released our new React component library! Check out the documentation at docs.example.com #OpenSource #React",
+    timestamp: "3 days ago",
+    avatar: "https://picsum.photos/seed/code/100",
+  }
 ];
 
 const Index = () => {
@@ -34,7 +61,7 @@ const Index = () => {
           Social Feed
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          Discover what our community is sharing across social media
+          Discover content from YouTube, Facebook, and X
         </p>
       </header>
       

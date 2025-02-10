@@ -21,10 +21,8 @@ export function PostGrid({ posts }: PostGridProps) {
         <PostCard
           key={post.id}
           {...post}
-          className="transform transition-all duration-300 hover:-translate-y-1"
-          style={{
-            animationDelay: `${index * 0.1}s`,
-          }}
+          className={`transform transition-all duration-300 hover:-translate-y-1 animate-fade-up`}
+          style={{ animationDelay: `${index * 100}ms` }}
         />
       ))}
     </div>
