@@ -1,8 +1,11 @@
 
 import { PostGrid } from "@/components/PostGrid";
 import { processPost } from "@/templates";
+import { useEffect, useState } from "react";
+import { SocialPost } from "@/types/social";
+import { getTemplate } from "@/templates";
 
-// Mock data - replace with actual data fetching
+// Fallback mock data
 const RAW_POSTS = [
   {
     id: "1",
@@ -54,9 +57,30 @@ const RAW_POSTS = [
   }
 ];
 
-const MOCK_POSTS = RAW_POSTS.map(processPost);
-
 const Index = () => {
+  const [posts, setPosts] = useState<SocialPost[]>(RAW_POSTS.map(processPost));
+
+  useEffect(() => {
+    const fetchAllPosts = async () => {
+      const platforms = ['YouTube', 'Facebook', 'X'];
+      const allPosts: SocialPost[] = [];
+
+      for (const platform of platforms) {
+        const template = getTemplate(platform);
+        if (template?.fetchPosts) {
+          const platformPosts = await template.fetchPosts();
+          allPosts.push(...platformPosts);
+        }
+      }
+
+      if (allPosts.length > 0) {
+        setPosts(allPosts.map(processPost));
+      }
+    };
+
+    fetchAllPosts();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <header className="py-8 px-6 text-center">
@@ -69,7 +93,7 @@ const Index = () => {
       </header>
       
       <main className="container mx-auto px-4 pb-12">
-        <PostGrid posts={MOCK_POSTS} />
+        <PostGrid posts={posts} />
       </main>
     </div>
   );

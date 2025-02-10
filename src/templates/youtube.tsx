@@ -29,5 +29,35 @@ export const YouTubeTemplate: FeedTemplate = {
         <p className="text-gray-700 mb-3 line-clamp-4">{post.content}</p>
       </>
     );
+  },
+  fetchPosts: async () => {
+    try {
+      // Using the YouTube RSS feed for a public channel (e.g., YouTube Trending)
+      const response = await fetch('https://www.youtube.com/feeds/videos.xml?channel_id=UCBR8-60-B28hp2BmDPdntcQ');
+      const text = await response.text();
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(text, 'text/xml');
+      const entries = Array.from(xmlDoc.getElementsByTagName('entry'));
+
+      return entries.map((entry, index) => {
+        const videoId = entry.getElementsByTagName('yt:videoId')[0]?.textContent || '';
+        const title = entry.getElementsByTagName('title')[0]?.textContent || '';
+        const author = entry.getElementsByTagName('author')[0]?.getElementsByTagName('name')[0]?.textContent || 'YouTube Channel';
+        
+        return {
+          id: videoId || `yt-${index}`,
+          username: author,
+          platform: 'YouTube',
+          content: title,
+          timestamp: new Date().toISOString(),
+          metadata: {
+            videoId
+          }
+        };
+      });
+    } catch (error) {
+      console.error('Error fetching YouTube data:', error);
+      return [];
+    }
   }
 };

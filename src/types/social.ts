@@ -13,4 +13,5 @@ export interface FeedTemplate {
   name: string;
   renderContent: (post: SocialPost) => React.ReactNode;
   extractMetadata?: (content: string) => Record<string, any>;
+  fetchPosts?: () => Promise<SocialPost[]>;
 }

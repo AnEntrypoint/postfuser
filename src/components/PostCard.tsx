@@ -9,7 +9,7 @@ interface PostCardProps extends SocialPost {
   style?: React.CSSProperties;
 }
 
-export function PostCard({ username, platform, content, timestamp, avatar, className, style, metadata }: PostCardProps) {
+export function PostCard({ id, username, platform, content, timestamp, avatar, className, style, metadata }: PostCardProps) {
   const template = getTemplate(platform);
 
   return (
@@ -43,7 +43,7 @@ export function PostCard({ username, platform, content, timestamp, avatar, class
           </div>
         </div>
         
-        {template?.renderContent({ username, platform, content, timestamp, avatar, metadata })}
+        {template?.renderContent({ id, username, platform, content, timestamp, avatar, metadata })}
         
         <time className="text-sm text-gray-500">{timestamp}</time>
       </div>
