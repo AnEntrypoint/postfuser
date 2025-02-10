@@ -1,8 +1,9 @@
 
 import { PostGrid } from "@/components/PostGrid";
+import { processPost } from "@/templates";
 
 // Mock data - replace with actual data fetching
-const MOCK_POSTS = [
+const RAW_POSTS = [
   {
     id: "1",
     username: "TechChannel",
@@ -52,6 +53,8 @@ const MOCK_POSTS = [
     avatar: "https://picsum.photos/seed/code/100",
   }
 ];
+
+const MOCK_POSTS = RAW_POSTS.map(processPost);
 
 const Index = () => {
   return (

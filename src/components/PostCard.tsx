@@ -1,27 +1,16 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { SocialPost } from "@/types/social";
+import { getTemplate } from "@/templates";
 
-interface PostCardProps {
-  username: string;
-  platform: string;
-  content: string;
-  timestamp: string;
-  avatar?: string;
+interface PostCardProps extends SocialPost {
   className?: string;
   style?: React.CSSProperties;
-  videoId?: string;
 }
 
-export function PostCard({ username, platform, content, timestamp, avatar, className, style }: PostCardProps) {
-  // Extract YouTube video ID from content if it's a YouTube post
-  const getYouTubeVideoId = (content: string) => {
-    const urlRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-    const match = content.match(urlRegex);
-    return match ? match[1] : null;
-  };
-
-  const videoId = platform === "YouTube" ? getYouTubeVideoId(content) : null;
+export function PostCard({ username, platform, content, timestamp, avatar, className, style, metadata }: PostCardProps) {
+  const template = getTemplate(platform);
 
   return (
     <Card 
@@ -54,19 +43,8 @@ export function PostCard({ username, platform, content, timestamp, avatar, class
           </div>
         </div>
         
-        {platform === "YouTube" && videoId && (
-          <div className="mb-3 aspect-video">
-            <iframe
-              src={`https://www.youtube.com/embed/${videoId}`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full rounded-lg"
-            />
-          </div>
-        )}
+        {template?.renderContent({ username, platform, content, timestamp, avatar, metadata })}
         
-        <p className="text-gray-700 mb-3 line-clamp-4">{content}</p>
         <time className="text-sm text-gray-500">{timestamp}</time>
       </div>
     </Card>
